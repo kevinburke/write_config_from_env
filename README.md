@@ -27,7 +27,8 @@ timezones:
 
 Environment variables leak trivially to exception reporting tools like Sentry,
 or error pages/admin screens. Environment variables also get passed to
-subprocesses by default.
+subprocesses by default. Putting your command in a Docker container does not
+protect you from this.
 
 Writing configuration to a file isn't perfect - people can still try to read the
 file - but it's less error prone than using environment variables, and we set

@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 BUMP_VERSION := $(shell command -v bump_version)
 STATICCHECK := $(shell command -v staticcheck)
 
