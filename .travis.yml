@@ -3,9 +3,9 @@ go_import_path: github.com/kevinburke/write_config_from_env
 language: go
 
 go:
-  - 1.7
   - 1.8
-  - tip
+  - 1.9
+  - master
 
 script:
     - make race-test
