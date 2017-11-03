@@ -5,31 +5,12 @@ import (
 	"testing"
 )
 
-var escapeTests = []struct {
-	in   string
-	want string
-}{
-	{"foo", "foo"},
-	{"foo-bar", "'foo-bar'"},
-}
-
-func TestEscape(t *testing.T) {
-	for _, tt := range escapeTests {
-		got := escape(tt.in)
-		if got != tt.want {
-			t.Errorf("escape(%q): got %q, want %q", tt.in, got, tt.want)
-		}
-	}
-}
-
-var expectedConfig = `port: 56789
-public_host: 'localhost:7'
-twilio_account_sid: AC123
+var expectedConfig = `port: "56789"
+public_host: localhost:7
 timezones:
-  - America/Los_Angeles
-  - America/New_York
-
-
+- America/Los_Angeles
+- America/New_York
+twilio_account_sid: AC123
 `
 
 func TestWriteConfig(t *testing.T) {

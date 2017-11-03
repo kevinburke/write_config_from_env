@@ -82,6 +82,15 @@ Usage of write_config_from_env:
         variables will be written to the config
 ```
 
+If you don't want to write every environment variable to the file, you can
+specify a whitelist argument, as many times as you want.
+
+```
+write_config_from_env --whitelist=PATH --whitelist=PORT --whitelist=TZ
+```
+
+Only environment variables matching the whitelist will get written.
+
 ### Installation
 
 Releases for popular operating systems are available on the [releases

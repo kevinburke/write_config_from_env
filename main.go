@@ -7,6 +7,8 @@ import (
 	"io"
 	"os"
 	"strings"
+
+	yaml "gopkg.in/yaml.v2"
 )
 
 const Version = "0.2"
@@ -43,18 +45,8 @@ func checkErr(err error, activity string) {
 	}
 }
 
-// http://stackoverflow.com/a/22235064/329700
-var specialChars = ":{}[],&*#?|-<>=!%@\\"
-
-func escape(arg string) string {
-	if strings.ContainsAny(arg, specialChars) {
-		// this is probably incorrect
-		return "'" + strings.Replace(arg, "'", "\\'", -1) + "'"
-	}
-	return arg
-}
-
 func writeConfig(b *bytes.Buffer, environ []string, whitelist map[string]bool) {
+	mp := make(map[string]interface{})
 	for i := range environ {
 		// IndexByte would be faster but performance or allocations are not
 		// really a problem here
@@ -65,26 +57,27 @@ func writeConfig(b *bytes.Buffer, environ []string, whitelist map[string]bool) {
 		if len(whitelist) > 0 && whitelist[parts[0]] == false {
 			continue
 		}
-		b.WriteString(strings.ToLower(parts[0]))
-		b.WriteByte(':')
 		if strings.IndexByte(parts[1], ',') >= 0 {
-			b.WriteByte('\n')
 			args := strings.Split(parts[1], ",")
+			vals := make([]string, 0)
 			for j := range args {
 				if args[j] == "" {
 					continue
 				}
-				b.WriteString("  - ")
-				b.WriteString(escape(args[j]))
-				b.WriteByte('\n')
+				vals = append(vals, args[j])
 			}
+			mp[strings.ToLower(parts[0])] = vals
 		} else {
-			b.WriteByte(' ')
-			b.WriteString(escape(parts[1]))
+			mp[strings.ToLower(parts[0])] = parts[1]
 		}
-		b.WriteByte('\n')
 	}
-	b.WriteByte('\n')
+	out, err := yaml.Marshal(mp)
+	if err != nil {
+		panic(err)
+	}
+	if _, err := b.Write(out); err != nil {
+		panic(err)
+	}
 }
 
 func main() {
