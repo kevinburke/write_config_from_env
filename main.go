@@ -11,7 +11,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-const Version = "0.2"
+const Version = "0.3"
 
 type whitelistArg []string
 
