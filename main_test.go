@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-var expectedConfig = `port: "56789"
+var expectedConfig = `flag_new_router: "true"
+port: "56789"
 public_host: localhost:7
 timezones:
 - America/Los_Angeles
@@ -16,6 +17,7 @@ twilio_account_sid: AC123
 func TestWriteConfig(t *testing.T) {
 	t.Parallel()
 	env := []string{
+		"FLAG_NEW_ROUTER=true",
 		"PORT=56789",
 		"PUBLIC_HOST=localhost:7",
 		"TWILIO_ACCOUNT_SID=AC123",

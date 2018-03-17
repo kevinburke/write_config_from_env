@@ -6,6 +6,7 @@ and writing them to a YML file, or printing them to stdout as YAML.
 If this is your environment:
 
 ```
+FLAG_NEW_ROUTER=true
 PORT=56789
 PUBLIC_HOST=localhost:7000
 TWILIO_ACCOUNT_SID=AC123
@@ -15,13 +16,17 @@ TIMEZONES=America/Los_Angeles,America/New_York
 You will get a config file like this:
 
 ```
-port: 56789
+flag_new_router: "true"
+port: "56789"
 public_host: 'localhost:7000'
 twilio_account_sid: AC123
 timezones:
   - America/Los_Angeles
   - America/New_York
 ```
+
+Note, all values are strings or arrays of strings. If a variable contains a
+comma, it will be destructured into an array.
 
 ### Why not just use environment variables?
 
