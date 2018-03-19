@@ -104,7 +104,7 @@ page][releases]. To install them:
 Find your target operating system (darwin, windows, linux) and desired bin
 directory, and modify the command below as appropriate:
 
-    curl --silent --location https://github.com/kevinburke/write_config_from_env/releases/download/0.4/write_config_from_env-linux-amd64 > /usr/local/bin/write_config_from_env && chmod 755 /usr/local/bin/write_config_from_env
+    curl --silent --location https://github.com/kevinburke/write_config_from_env/releases/download/0.5/write_config_from_env-linux-amd64 > /usr/local/bin/write_config_from_env && chmod 755 /usr/local/bin/write_config_from_env
 
 On Travis, you may want to create `$HOME/bin` and write to that, since
 /usr/local/bin isn't writable with their container-based infrastructure.
