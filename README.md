@@ -26,7 +26,18 @@ timezones:
 ```
 
 Note, all values are strings or arrays of strings. If a variable contains a
-comma, it will be destructured into an array.
+comma, it will be destructured into an array. Use the `yamlconfig` package in
+this directory to flexibly convert string-bools (`"true"` etc) to in memory
+booleans and string-ints to ints.
+
+```go
+type FileConfig struct {
+    FlagNewRouter yamlconfig.Bool `yaml:"flag_new_router"`
+    Port          yamlconfig.Int  `yaml:"port"`
+    PublicHost    string          `yaml:"public_host"`
+    AccountSID    string          `yaml:"twilio_account_sid"`
+}
+```
 
 ### Why not just use environment variables?
 
